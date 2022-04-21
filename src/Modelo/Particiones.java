@@ -20,4 +20,10 @@ public class Particiones extends AreasProceso{
         this.proceso = proceso;
     }
     
+    public int getNumero() {
+        return numero;
+    }
+    public String getProceso() {
+        return proceso;
+    }
 }

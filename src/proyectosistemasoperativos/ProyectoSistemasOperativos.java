@@ -5,6 +5,10 @@
 
 package proyectosistemasoperativos;
 
+import Controlador.ControladorVistaPrincipal;
+import Modelo.MVT;
+import Vista.VistaPrincipal;
+
 /**
  *
  * @author Jonatan, Angélica, Natali, Jesus
@@ -16,6 +20,10 @@ public class ProyectoSistemasOperativos {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        MVT mvt = new MVT();
+        VistaPrincipal vista = new VistaPrincipal();
+        ControladorVistaPrincipal control = new ControladorVistaPrincipal(mvt, vista);
+        vista.setVisible(true);
     }
     
 }

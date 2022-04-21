@@ -17,4 +17,7 @@ public class AreasLibres extends AreasProceso{
         this.numero = numero;
     }
     
+    public int getNumero() {
+        return numero;
+    }
 }
