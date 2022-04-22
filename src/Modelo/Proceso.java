@@ -31,4 +31,12 @@ public class Proceso{
         return duracionTotal;
     }
 
+    public String getNombreProceso() {
+        return nombreProceso;
+    }
+
+    public int getTamanio() {
+        return tamanio;
+    }
+
 }

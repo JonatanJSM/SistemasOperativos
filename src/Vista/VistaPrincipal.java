@@ -19,27 +19,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VistaPrincipal
      */
-    DefaultTableModel modelo1;
-    DefaultTableModel modelo2;
-    DefaultTableModel modelo3;
+
     public VistaPrincipal() {
         initComponents();
-        modelo1 = (DefaultTableModel) this.jTable1.getModel();
-        modelo2 = (DefaultTableModel) this.jTable2.getModel();
-        modelo3 = (DefaultTableModel) this.jTable3.getModel();
     }
 
-    public DefaultTableModel getmodelo1(){
-        return modelo1;
-    }
-    
-    public DefaultTableModel getmodelo2(){
-        return modelo2;
-    }
-        
-    public DefaultTableModel getmodelo3(){
-        return modelo3;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -277,7 +261,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.jTable4 = jTable4;
     }
 
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

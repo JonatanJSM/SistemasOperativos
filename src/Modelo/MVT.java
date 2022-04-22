@@ -18,6 +18,10 @@ public class MVT {
     private ArrayList <Particiones> particiones;
     private MemoriaPrincipal memoriaPrincipal;
     private int contadorTiempos;
+    private boolean procesoNoIngresado,aux;
+    // ProcesoNoIngresado es para saber si en algun tiempo un proceso no entró a memoria
+    // aux será para no aumentar el tiempo y se conserve en el paso
+        // Por si un espacio se desocupa o más de un proceso termina o inicia en el mismo tiempo
 
     public MVT() {
         procesos = new ArrayList <>();
@@ -26,9 +30,19 @@ public class MVT {
         memoriaPrincipal = new MemoriaPrincipal();
         areaslibres.add(new AreasLibres(1, 10, 54, true)); //Se agrega la primera área libre que se indica en la descrición del proyecto
         contadorTiempos = 0;
-        //leerProcesos();
+        procesoNoIngresado = true;
+        aux = true;
+        leerProcesos();
     }
 
+    public boolean isAux() {
+        return aux;
+    }
+    
+    public boolean isProcesoNoIngresado() {
+        return procesoNoIngresado;
+    }
+    
     public ArrayList<AreasLibres> getAreasLibres(){
         return this.areaslibres;
     }
@@ -40,7 +54,7 @@ public class MVT {
     public void aumentaTiempo(){
         this.contadorTiempos++;
     }
-
+    
     public int getTiempo(){
         return this.contadorTiempos;
     }
@@ -57,12 +71,25 @@ public class MVT {
     public boolean detectarCambioTiempoLlegada(int i){
         boolean x = false; // false = no hubo cambios
         int j = 0;
-        while(x == false){
+        while(x == false && j<procesos.size()){
             if(procesos.get(j).getTiempoLLegada() == i){
                 x = true;
             }
+            j++;
         }
         return x;
+    }
+    
+    public int indiceProceso(int i){
+        boolean x = false; // false = no hubo cambios
+        int j = 0;
+        while(x == false && j<procesos.size()){
+            if(procesos.get(j).getTiempoLLegada() == i){
+                x = true;
+            }
+            j++;
+        }
+        return j;
     }
     
     // Cuando se crea un proceso se hace la suma del tiempo de llegada más lo que dura. Así nos dará el click en el que terminará
@@ -74,10 +101,11 @@ public class MVT {
             if(procesos.get(j).getDuracionTotal() == i){
                 x = true;
             }
+            j++;
         }
         return x;
     }
-
+    
     public void gestorTiempo(){
         switch(this.contadorTiempos){
             case 1:
@@ -117,4 +145,51 @@ public class MVT {
             break;
         }
     }
+    
+    public void gestorProcesos(){ //Esto todavía está en construccion
+        // Es como la función que está arriba
+        // se revisa si llega proceso para esta función
+        // se revisa si termina uno proceso
+        // Se controla el aux ya que si un proceso puede entrar en un paso no se cambia a otro tiempo
+        // Podría haber un if donde se revisa si hay proceso en espera que pueda entrar, si no hay se continua
+        // otro if que revise si ya hay fragmentación
+            // Si no hay se puede utilizar llegadaProceso(int tiempo, int numero)
+            // si ya lo hay entonces llegadaPRocesoAreasLibresFragmentadas()
+        llegadaProceso(contadorTiempos,0);
+    }
+    
+    // ESto solo es cuando no se ha terminado algún proceso, y todos llegan seguido
+    // Cuando hay fragmentacion hay que ver si el proceso da en algun fragmento
+    public void llegadaProceso(int tiempo, int numero){
+        int j = indiceProceso(tiempo)-1;
+        if(areaslibres.get(0).getTamanio()>procesos.get(j).getTamanio()){
+            particiones.add(new Particiones(numero,procesos.get(j).getNombreProceso(),areaslibres.get(0).getLocalidad(),procesos.get(j).getTamanio(),true));
+            int x = areaslibres.get(0).getTamanio();
+            areaslibres.get(0).setTamanio(x - procesos.get(j).getTamanio());
+            x = areaslibres.get(0).getLocalidad();
+            areaslibres.get(0).setLocalidad(x + procesos.get(j).getTamanio());
+            procesos.remove(j);
+        }else{
+            procesoNoIngresado = false;
+        }
+    }
+    
+    public void terminaProceso(int tiempo){
+        // Cuando un proceso acaba se hacen más filas en la tabla de áreas libres
+        // Se debería revisar si hay fragmentos nuevos que estén pegados a otros para unirlos
+        // Si etamos en un área libre y sumamos su localidas más tamaño esto nos dará la localidad de la siguinte área libre que exista
+        // con la localidad podemos ver si un área libre está detrás o adelante de otra área
+    }
+    
+    public void llegadaProcesoAreasLibresFragmentadas(){
+        //Cuando un proceso acaba y no han temrinado de llegar más procesos o están a la espera de un área libre
+        // Se necesitan revisar las áreas libres diponibles, ya que no solo habrá una
+    }
+    
+    public boolean procesosEnEspera(){
+        // Determinar si ya hay espacio para los que no han entrado
+        // se podría utilizar con llegadaProcesoAreasLibresFragmentadas()
+        return false;
+    }
+    
 }

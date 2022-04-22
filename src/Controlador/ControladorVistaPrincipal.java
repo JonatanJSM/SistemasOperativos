@@ -35,9 +35,11 @@ public class ControladorVistaPrincipal implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        mvt.aumentaTiempo();
-        mvt.gestorTiempo();
+        //if(mvt.isAux()) {
+            mvt.aumentaTiempo();
+        //}
+        mvt.gestorProcesos();
+        //mvt.gestorTiempo();
         vista.getjButton1().setText("Paso " + mvt.getTiempo());
         actualizaALibres();
         actualizaParticiones();
@@ -131,10 +133,14 @@ public class ControladorVistaPrincipal implements ActionListener {
             this.vista.getjTable3().setModel(tablaModelo);
     }
 
-    
-
     //Iniciar tablas
     public void iniciarTablas(){
+        inicializarTablaAreasLibres();
+        inicializarTablaParticiones();
+        inicializarTablaMemoria();
+    }
+    
+    public void inicializarTablaAreasLibres(){
         //SE CREA LA TABLA DE AREAS LIBRES 
         DefaultTableModel aLibres = new DefaultTableModel();
         aLibres.addColumn("No");
@@ -142,6 +148,7 @@ public class ControladorVistaPrincipal implements ActionListener {
         aLibres.addColumn("Tamaño");
         aLibres.addColumn("Estado");
 
+        //Mostrar barra horizontal 
         vista.getjTable1().setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         int[] anchos = {30, 30, 30, 30};
@@ -159,8 +166,9 @@ public class ControladorVistaPrincipal implements ActionListener {
                 mvt.getAreasLibres().get(0).getTamanio(), "A"});
         }
         this.vista.getjTable1().setModel(aLibres);
-        
-
+    }
+    
+    public void inicializarTablaParticiones(){
         //SE CREA LA TABLA DE PARTICIONES
         DefaultTableModel tparticiones = new DefaultTableModel();
         tparticiones.addColumn("No");
@@ -175,9 +183,11 @@ public class ControladorVistaPrincipal implements ActionListener {
         }    
         tparticiones.addRow(new Object[] {"","","","",""}); //fila de prueba
         this.vista.getjTable2().setModel(tparticiones);
-
+    }
+    
+    public void inicializarTablaMemoria(){
         //SE CREA LA TABLA DE LA MEMORIA
-            DefaultTableModel tablaModelo = new DefaultTableModel();
+        DefaultTableModel tablaModelo = new DefaultTableModel();
         //tablaModelo.setDefaultRenderer(Object.class, new MyTableCellRender());
         tablaModelo.addColumn("SO");
         //Se establece el ancho de la columna de la tabla

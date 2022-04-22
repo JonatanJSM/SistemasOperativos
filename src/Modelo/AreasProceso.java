@@ -31,5 +31,14 @@ public class AreasProceso {
     public boolean getEstado() {
         return estado;
     }
+
+    public void setTamanio(int tamanio) {
+        this.tamanio = tamanio;
+    }
+
+    public void setLocalidad(int localidad) {
+        this.localidad = localidad;
+    }
+    
     
 }
