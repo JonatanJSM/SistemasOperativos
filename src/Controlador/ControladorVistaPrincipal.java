@@ -42,6 +42,7 @@ public class ControladorVistaPrincipal implements ActionListener {
         actualizaALibres();
         actualizaParticiones();
         actualizaMemoria();
+        System.out.println("AREA DISPONIBLE: " + mvt.getMemoriaPrincipal().getAreaDisponible());
     }
 
     //tabla1 es areas libres
