@@ -15,6 +15,7 @@ public class Proceso{
     private int tiempoLLegada;
     private int duracion;
     private int duracionTotal; // Esto considerando en qué click debe acabar
+    private boolean enEspera;
 
     public Proceso(String nombreProceso, int tamanio, int tiempoLLegada, int duracion, boolean activo) {
         this.nombreProceso = nombreProceso;
@@ -24,6 +25,7 @@ public class Proceso{
         duracionTotal = tiempoLLegada + duracion;
 
         this.activo = activo;
+        this.enEspera = false;
     }
 
     public String getNombreProceso() {
@@ -52,6 +54,22 @@ public class Proceso{
 
     public boolean isActivo() {
         return activo;
+    }
+
+    public boolean isEnEspera() {
+        return enEspera;
+    }
+
+    public void setEnEspera(boolean enEspera) {
+        this.enEspera = enEspera;
+    }
+
+    public void setTiempoLLegada(int tiempoLLegada) {
+        this.tiempoLLegada = tiempoLLegada;
+    }
+
+    public void setDuracionTotal() {
+        this.duracionTotal = tiempoLLegada + duracion;
     }
 
 }
