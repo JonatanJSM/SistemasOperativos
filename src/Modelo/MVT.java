@@ -7,8 +7,6 @@ package Modelo;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
-import java.util.List;
 /**
  *
  * @author Angélica, Natali, Jesus, Jonatan
@@ -26,8 +24,8 @@ public class MVT {
         areaslibres = new ArrayList <>();
         particiones = new ArrayList <>();
         memoriaPrincipal = new MemoriaPrincipal();
-        memoriaPrincipal.setTamanio(64);
-        areaslibres.add(new AreasLibres(1, 10, 54, true)); //Se agrega la primera área libre que se indica en la descrición del proyecto
+        memoriaPrincipal.setTamanio(65);
+        areaslibres.add(new AreasLibres(1, 11, 53, true)); //Se agrega la primera área libre que se indica en la descrición del proyecto
         for(int i  = 0; i <=10; i++){
             memoriaPrincipal.getCeldas().get(i).setAsignada(true);
         }
@@ -62,18 +60,6 @@ public class MVT {
         procesos.add(new Proceso("D", 6, 4, 6,false));
         procesos.add(new Proceso("E", 14, 5, 5,false));
     }
-    
-    // Si se encuentra que un proceso llegó en el tiempo i, se detiene el ciclo y se retorna el valor
-    public boolean detectarCambioTiempoLlegada(int i){
-        boolean x = false; // false = no hubo cambios
-        int j = 0;
-        while(x == false){
-            if(procesos.get(j).getTiempoLLegada() == i){
-                x = true;
-            }
-        }
-        return x;
-    }
 
     public void actualizarEspera(){
         for(Proceso procesoActual : this.procesos){
@@ -83,19 +69,7 @@ public class MVT {
             }
         }
     }
-    
-    // Cuando se crea un proceso se hace la suma del tiempo de llegada más lo que dura. Así nos dará el click en el que terminará
-    // Esto evitará hacer lo que pensamos de ir restando a su tiempo y comprobar que llege a 0 para que termine
-    public boolean detectarCambioTiempoSalida(int i){ // Cuando termina un proceso
-        boolean x = false; // false = no hubo cambios
-        int j = 0;
-        while(x == false){
-            if(procesos.get(j).getDuracionTotal() == i){
-                x = true;
-            }
-        }
-        return x;
-    }
+
 
     public void gestorTiempo(){
         
@@ -180,9 +154,9 @@ public class MVT {
                     //particiones.indexOf(o)
                     Particiones particionPorBorrar = findParticionByProceso(particiones, procesoActual.getNombreProceso());
                   
-                    for(int i  = particionPorBorrar.getLocalidad() ; i <= particionPorBorrar.getLocalidad() + particionPorBorrar.getTamanio(); i++){
+                    for(int i  = (particionPorBorrar.getLocalidad()+1) ; i <= (particionPorBorrar.getLocalidad()) + particionPorBorrar.getTamanio(); i++){
                         memoriaPrincipal.getCeldas().get(i).setAsignada(false);
-                        System.out.println("CElda " + i + ": " + memoriaPrincipal.getCeldas().get(i).isAsignada());
+                        System.out.println("CElda borrada " + i + ": " + memoriaPrincipal.getCeldas().get(i).isAsignada());
                     }
     
                     for (Particiones areas : particiones) {
@@ -246,7 +220,9 @@ public class MVT {
 
         int indice = 0; //BORRAR
         for (Celdas integer : memoriaPrincipal.getCeldas()) {
-            System.out.println("CELDAs : " + ++indice + integer.isAsignada());
+            
+            System.out.println("CELDAs : " + indice + integer.isAsignada());
+      indice++;
         }
         indice = 0;
         for (Integer integer : limitesAreas) {

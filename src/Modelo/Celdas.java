@@ -13,4 +13,11 @@ public class Celdas {
     public void setAsignada(boolean asignada) {
         this.asignada = asignada;
     }
+
+    @Override
+    public String toString() {
+        return "Celdas{" + "asignada=" + asignada + '}';
+    }
+    
+    
 }

@@ -122,21 +122,31 @@ public class ControladorVistaPrincipal implements ActionListener {
                 this.vista.getjTable1().getColumnModel().getColumn(0).setMinWidth(anchos[0]);
 
             tablaModelo.addRow(new Object[] {"SO"});
-
+            
             for(Particiones particionActual : mvt.getParticiones()){
                 tablaModelo.addRow(new Object[] {particionActual.getProceso()});
+                
             }
             
             //AGREGAR EL DEFAULTRENDER PARA PODER CAMBIAR EL COLOR DE LAS FILAS DE ALGUNA TABLA
             this.vista.getjTable3().setDefaultRenderer(Object.class, new MyTableCellRender());
             this.vista.getjTable3().setModel(tablaModelo);
+            for(int i = 0; i<this.vista.getjTable3().getRowCount()-1;i++){
+                this.vista.getjTable3().setRowHeight(i, mvt.getParticiones().get(i).getTamanio()*7);
+            }
     }
 
     
 
     //Iniciar tablas
     public void iniciarTablas(){
-        //SE CREA LA TABLA DE AREAS LIBRES 
+       crearTablaAreasLibres();
+       crearTablaParticiones();
+       crearTablaMemoria();
+    }
+    
+    public void  crearTablaAreasLibres(){
+                //SE CREA LA TABLA DE AREAS LIBRES 
         DefaultTableModel aLibres = new DefaultTableModel();
         aLibres.addColumn("No");
         aLibres.addColumn("Localidad");
@@ -160,9 +170,10 @@ public class ControladorVistaPrincipal implements ActionListener {
                 mvt.getAreasLibres().get(0).getTamanio(), "A"});
         }
         this.vista.getjTable1().setModel(aLibres);
-        
-
-        //SE CREA LA TABLA DE PARTICIONES
+    }
+    
+    public void crearTablaParticiones(){
+         //SE CREA LA TABLA DE PARTICIONES
         DefaultTableModel tparticiones = new DefaultTableModel();
         tparticiones.addColumn("No");
         tparticiones.addColumn("Localidad");
@@ -176,8 +187,10 @@ public class ControladorVistaPrincipal implements ActionListener {
         }    
         tparticiones.addRow(new Object[] {"","","","",""}); //fila de prueba
         this.vista.getjTable2().setModel(tparticiones);
-
-        //SE CREA LA TABLA DE LA MEMORIA
+    }
+    
+    public void crearTablaMemoria(){
+         //SE CREA LA TABLA DE LA MEMORIA
             DefaultTableModel tablaModelo = new DefaultTableModel();
         //tablaModelo.setDefaultRenderer(Object.class, new MyTableCellRender());
         tablaModelo.addColumn("SO");
