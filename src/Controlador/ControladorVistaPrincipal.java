@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -41,6 +41,7 @@ public class ControladorVistaPrincipal implements ActionListener {
         actualizaALibres();
         actualizaParticiones();
         actualizaMemoria();
+        
         System.out.println("AREA DISPONIBLE: " + mvt.getMemoriaPrincipal().getAreaDisponible());
     }
 
@@ -75,7 +76,7 @@ public class ControladorVistaPrincipal implements ActionListener {
 
     //tabla2 es particiones
     public void actualizaParticiones(){
-vista.getTablaModelo2().setRowCount(0);
+    vista.getTablaModelo2().setRowCount(0);
         int[] anchosP = {50, 200, 200, 200,100};
         for (int i = 0; i < this.vista.getjTable2().getColumnCount(); i++) {
             this.vista.getjTable2().getColumnModel().getColumn(i).setPreferredWidth(anchosP[i]);
@@ -100,19 +101,19 @@ vista.getTablaModelo2().setRowCount(0);
     //tabla3 es memoria
 
     public void actualizaMemoria(){
+
         //tablaModelo.setDefaultRenderer(Object.class, new MyTableCellRender());
             vista.getTablaModelo3().setRowCount(0);
             int[] anchos = {100};
                 this.vista.getjTable1().getColumnModel().getColumn(0).setMinWidth(anchos[0]);
 
             vista.getTablaModelo3().addRow(new Object[] {"SO"});
-            //int i = 0;
+            this.vista.getjTable3().setRowHeight(0,90);
             for(Particiones particionActual : mvt.getParticiones()){
                 vista.getTablaModelo3().addRow(new Object[] {particionActual.getProceso()});
-              //  this.vista.getjTable3().setRowHeight(i, mvt.getParticiones().get(i).getTamanio()*5);
-              //  i++;
             }
-
+            actuliazarAlturaCeldas();
+           // System.out.println("Columnas"+vista.getjTable3().getRowCount());
             //AGREGAR EL DEFAULTRENDER PARA PODER CAMBIAR EL COLOR DE LAS FILAS DE ALGUNA TABLA
             this.vista.getjTable3().setDefaultRenderer(Object.class, new MyTableCellRender());
     }
@@ -169,5 +170,11 @@ vista.getTablaModelo2().setRowCount(0);
         //AGREGAR EL DEFAULTRENDER PARA PODER CAMBIAR EL COLOR DE LAS FILAS DE ALGUNA TABLA
         this.vista.getjTable3().setDefaultRenderer(Object.class, new MyTableCellRender());
 
+    }
+    
+    public void actuliazarAlturaCeldas(){
+        for(int i = 1; i<vista.getjTable3().getRowCount(); i++){
+           this.vista.getjTable3().setRowHeight(i, mvt.getParticiones().get(i-1).getTamanio()*9);
+        }
     }
 }
