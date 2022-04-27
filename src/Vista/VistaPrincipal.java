@@ -19,27 +19,29 @@ public class VistaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VistaPrincipal
      */
-    DefaultTableModel modelo1;
-    DefaultTableModel modelo2;
-    DefaultTableModel modelo3;
+    DefaultTableModel Tablamodelo1;
+    DefaultTableModel TablaModelo2;
+    DefaultTableModel TablaModelo3;
     public VistaPrincipal() {
         initComponents();
-        modelo1 = (DefaultTableModel) this.jTable1.getModel();
-        modelo2 = (DefaultTableModel) this.jTable2.getModel();
-        modelo3 = (DefaultTableModel) this.jTable3.getModel();
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+        Tablamodelo1 = (DefaultTableModel) this.jTable1.getModel();
+        TablaModelo2 = (DefaultTableModel) this.jTable2.getModel();
+        TablaModelo3 = (DefaultTableModel) this.jTable3.getModel();
     }
 
-    public DefaultTableModel getmodelo1(){
-        return modelo1;
+    public DefaultTableModel getTablamodelo1() {
+        return Tablamodelo1;
+    }
+
+    public DefaultTableModel getTablaModelo2() {
+        return TablaModelo2;
+    }
+
+    public DefaultTableModel getTablaModelo3() {
+        return TablaModelo3;
     }
     
-    public DefaultTableModel getmodelo2(){
-        return modelo2;
-    }
-        
-    public DefaultTableModel getmodelo3(){
-        return modelo3;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,11 +65,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("SIMULACIÓN DE ASIGNACIÓN DE MEMORIA CON MVT");
-        jLabel1.setBounds(240, 10, 324, -1);
-        getContentPane().add(jLabel1);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, 324, -1));
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -75,9 +76,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jButton1.setText("Paso 0");
-        jButton1.setBounds(640, 540, 200, 20);
-        getContentPane().add(jButton1);
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 550, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,8 +87,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
-            jScrollPane1.setBounds(50, 260, 460, 150);
-        getContentPane().add(jScrollPane1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 650, 150));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,20 +99,20 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(jTable2);
-            jScrollPane2.setBounds(50, 470, 460, 150);
-        getContentPane().add(jScrollPane2);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, 650, 150));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "SO"
+                "Memoria"
             }
         ));
         jScrollPane3.setViewportView(jTable3);
-            jScrollPane3.setBounds(620, 140, 160, 300);
-        getContentPane().add(jScrollPane3);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 50, 160, 610));
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -128,16 +127,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         ));
         jScrollPane4.setViewportView(jTable4);
-            jScrollPane4.setBounds(130, 50, 470, 140);
-        getContentPane().add(jScrollPane4);
+
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 470, 130));
 
         jLabel2.setText("Tabla Áreas Libres (TAL[])");
-        jLabel2.setBounds(60, 230, 250, 20);
-        getContentPane().add(jLabel2);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 150, -1));
 
         jLabel3.setText("Tabla Particiones (TP[])");
-        jLabel3.setBounds(60, 430, 200, 20);
-        getContentPane().add(jLabel3);
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -277,8 +274,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.jTable4 = jTable4;
     }
 
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

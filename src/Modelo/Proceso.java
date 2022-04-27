@@ -6,7 +6,7 @@ package Modelo;
 
 /**
  *
- * @author jonat
+ * @author Natali,Alma, Jesus,jonatan, 
  */
 public class Proceso{
     private boolean activo;

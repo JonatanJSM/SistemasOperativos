@@ -14,10 +14,4 @@ public class Celdas {
         this.asignada = asignada;
     }
 
-    @Override
-    public String toString() {
-        return "Celdas{" + "asignada=" + asignada + '}';
-    }
-    
-    
 }

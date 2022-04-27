@@ -70,118 +70,70 @@ public class MVT {
         }
     }
 
-
     public void gestorTiempo(){
-        
         //AGREGAr LAS AREAS LIBRES
-        ArrayList<Integer> limitesAreas = new ArrayList<>();
-        boolean inferior = false;
-        boolean superior = false;
-        int limiteInferior = 0;
-        int limiteSuperior = 0;
-        int numPart = 1;
-        areaslibres.clear();
-        for (int i = 0; i <= memoriaPrincipal.getCeldas().size()-1; i++) {
-            //arreglar los limites
-            if( i != 0 && i!= memoriaPrincipal.getCeldas().size()-1){
-                if( memoriaPrincipal.getCeldas().get(i-1).isAsignada() == true && memoriaPrincipal.getCeldas().get(i).isAsignada() == false){
-                    limiteInferior = i;
-                    inferior = true;
-                    System.out.println("        -----------------------------INFERIOR: " + limiteInferior );
-                }
-
-                if( i != 63){
-                    if( memoriaPrincipal.getCeldas().get(i-1).isAsignada() == false && memoriaPrincipal.getCeldas().get(i).isAsignada() == true){
-                        limiteSuperior = i;
-                        superior = true;
-                        System.out.println("        -----------------------------SuPERIOR: " + limiteSuperior );
-                        
-                    }
-                }else{
-                    if(superior ==false){
-                        if(memoriaPrincipal.getCeldas().get(64).isAsignada() == false && memoriaPrincipal.getCeldas().get(63).isAsignada() == false){
-                            limiteSuperior = 65;
-                            superior  = true;
-                            System.out.println("        -----------------------------SuPERIOR: " + limiteSuperior );
-                        }
-                    }
-                }
-                
-            }
-
-            if( inferior ==true && superior == true ){
-                if(limiteSuperior > limiteInferior){
-                    limitesAreas.add(limiteInferior);
-                    limitesAreas.add(limiteSuperior);
-                    areaslibres.add(new AreasLibres(numPart, limiteInferior, limiteSuperior - limiteInferior -1, true));
-                }else{
-                    limitesAreas.add(limiteSuperior);
-                    limitesAreas.add(limiteInferior);
-                    areaslibres.add(new AreasLibres(numPart, limiteSuperior, limiteInferior - limiteSuperior -1, true));
-                }
-                inferior =false;
-                superior = false;
-                numPart++;
-            }
-
-        }
-        //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-        //AGREGAR LAS PARTICIONES 
-        //GUARDAR LOS VALORES DEL NUMERO, LOCALIDAD y TAMANIO DE LA ULTIMA PARTICION
-        int ultNumParticion = 0;
-        int ultLocParticion = areaslibres.get(areaslibres.size() -1).getLocalidad(); // es la localidad 10 donde termina el SO
-        int ultTamParticion = 0;
+        agregarAreasLibres();
+           
         boolean empty = true;
-        for (Particiones t : particiones) {
-            if (t != null) {
-                empty = false;
-            break;
-            }
-        }
-        //if ( ! empty){ //usar un for para buscar la primera particion que tenga tamaño suficiente para almacenar el proceso
-            //ultNumParticion = particiones.get(particiones.size() - 1).getNumero();
-            //ultLocParticion = particiones.get(particiones.size() - 1).getLocalidad();
-            //ultTamParticion = particiones.get(particiones.size() - 1).getTamanio();
-        //}
+
+        empty = comprobarParticiones();
+        
+        limpiarMemoriaProcesosTerminados();
+        
+        actualizarEspera();
+        
+        agregarProcesosEntrantes(empty);
+    }
+
+    public static Particiones findParticionByProceso(Collection<Particiones> listCarnet, String codeIsIn) {
+        return listCarnet.stream().filter(carnet -> codeIsIn.equals(carnet.getProceso())).findFirst().orElse(null);
+    }
+    
+    public void limpiarMemoriaProcesosTerminados(){
         for (Proceso procesoActual : this.procesos) {
             if(procesoActual.isActivo() == true){
                 procesoActual.setEnEspera(false);
-                //actualizar la llegada de E cuando no ha iniciado
                 if(procesoActual.getDuracionTotal() <= contadorTiempos){
-                
                     procesoActual.setActivo(false);
-                    //particiones.indexOf(o)
                     Particiones particionPorBorrar = findParticionByProceso(particiones, procesoActual.getNombreProceso());
-                  
                     for(int i  = (particionPorBorrar.getLocalidad()+1) ; i <= (particionPorBorrar.getLocalidad()) + particionPorBorrar.getTamanio(); i++){
                         memoriaPrincipal.getCeldas().get(i).setAsignada(false);
                         System.out.println("CElda borrada " + i + ": " + memoriaPrincipal.getCeldas().get(i).isAsignada());
                     }
-    
                     for (Particiones areas : particiones) {
                         System.out.println("Particion " + areas.getNumero() + areas.getProceso());
                     }
                     particiones.removeIf( particiones -> particiones.getProceso().equals(procesoActual.getNombreProceso()));
-                    
                 }
             }
         }
-
-        actualizarEspera();
+    }
+    
+    public boolean comprobarParticiones(){
+        boolean x = true;
+        for (Particiones t : particiones) {
+            if (t != null) {
+                x = false;
+            break;
+            }
+        }
+        return x;
+    }
+    
+    public void agregarProcesosEntrantes(boolean empty){
+        //GUARDAR LOS VALORES DEL NUMERO, LOCALIDAD y TAMANIO DE LA ULTIMA PARTICION
+        int ultNumParticion = 0;
+        int ultLocParticion = areaslibres.get(areaslibres.size() -1).getLocalidad(); // es la localidad 10 donde termina el SO
+        int ultTamParticion = 0;
+        
         for(Proceso procesoActual : this.procesos){
             if(procesoActual.getTiempoLLegada() == contadorTiempos){
-                if(procesoActual.getNombreProceso() != "p"){
-                    //procesoActual.setActivo(true); 
-                }
                 if(! empty){
                     for (AreasLibres aLibreActual : areaslibres) {
                         if (aLibreActual.getTamanio() >= procesoActual.getTamanio()){
-                             //usar un for para buscar la primera particion que tenga tamaño suficiente para almacenar el proceso
                                 ultNumParticion = particiones.get(particiones.size() - 1).getNumero();
                                 ultLocParticion = aLibreActual.getLocalidad();
                                 ultTamParticion = particiones.get(particiones.size() - 1).getTamanio();
-                            
                         }
                         break;
                     }
@@ -196,50 +148,16 @@ public class MVT {
                             memoriaPrincipal.getCeldas().get(i).setAsignada(true);
                             System.out.println("CElda " + i + ": " + memoriaPrincipal.getCeldas().get(i).isAsignada());
                         }
-                        //contadorTiempos = 0;
-
                     }else{
                         //SE PONE EL PROCESO EN ESPERA
                         procesoActual.setEnEspera(true);
                     }
-                
-                //}else{
-                //
-                //}
-                //else{//
-                //    particiones.add(new Particiones(ultNumParticion + 1, procesoActual.getNombreProceso(), 
-                //    areaslibres.get(areaslibres.size() -1).getLocalidad(),
-                //    procesoActual.getTamanio(), true));
-                //}
-                
             }
-
             agregarAreasLibres();
-            
         }
-
-        int indice = 0; //BORRAR
-        for (Celdas integer : memoriaPrincipal.getCeldas()) {
-            
-            System.out.println("CELDAs : " + indice + integer.isAsignada());
-      indice++;
-        }
-        indice = 0;
-        for (Integer integer : limitesAreas) {
-            System.out.println("limite : " + integer);
-        }
-        indice = 0;
     }
-
-    public static Particiones findParticionByProceso(Collection<Particiones> listCarnet, String codeIsIn) {
-        return listCarnet.stream().filter(carnet -> codeIsIn.equals(carnet.getProceso())).findFirst().orElse(null);
-    }
-
-
-
 
     public void agregarAreasLibres(){
-        ArrayList<Integer> limitesAreas = new ArrayList<>();
         boolean inferior = false;
         boolean superior = false;
         int limiteInferior = 0;
@@ -254,22 +172,11 @@ public class MVT {
                     inferior = true;
                     System.out.println("        -----------------------------INFERIOR: " + limiteInferior );
                 }
-/*
-                if(i == 63){
-                    if(memoriaPrincipal.getCeldas().get(64).isAsignada() == false && memoriaPrincipal.getCeldas().get(63).isAsignada() == false){
-                        limiteSuperior = 64;
-                        superior  = true;
-                        System.out.println("        -----------------------------SuPERIOR: " + limiteSuperior );
-                    }
-                }
-                */
-
                 if( i != 63){
                     if( memoriaPrincipal.getCeldas().get(i-1).isAsignada() == false && memoriaPrincipal.getCeldas().get(i).isAsignada() == true){
                         limiteSuperior = i;
                         superior = true;
                         System.out.println("        -----------------------------SuPERIOR: " + limiteSuperior );
-                        
                     }
                 }else{
                     if(superior ==false){
@@ -280,42 +187,11 @@ public class MVT {
                         }
                     }
                 }
-/*
-                if( i != memoriaPrincipal.getCeldas().size() -1){
-                    if( memoriaPrincipal.getCeldas().get(i-1).isAsignada() == false && memoriaPrincipal.getCeldas().get(i).isAsignada() == true){
-                        limiteSuperior = i;
-                        superior = true;
-                        
-                    }
-                }else{
-                    if(superior ==false){
-                        if(memoriaPrincipal.getCeldas().get(62).isAsignada() == false && memoriaPrincipal.getCeldas().get(63).isAsignada() == false){
-                            limiteSuperior = i;
-                            superior  = true;
-                        }
-                    }
-                }
-*/
-                //if(superior == false){
-                //    if(memoriaPrincipal.getCeldas().get(63).isAsignada() == false && memoriaPrincipal.getCeldas().get(64).isAsignada() == false){
-                //        limiteSuperior = i;
-                //        superior  = true;
-                //    }
-                //}/*
-                
-                
             }
-
-            
-
             if( inferior ==true && superior == true ){
                 if(limiteSuperior > limiteInferior){
-                    limitesAreas.add(limiteInferior);
-                    limitesAreas.add(limiteSuperior);
                     areaslibres.add(new AreasLibres(numPart, limiteInferior, limiteSuperior - limiteInferior -1, true));
                 }else{
-                    limitesAreas.add(limiteSuperior);
-                    limitesAreas.add(limiteInferior);
                     areaslibres.add(new AreasLibres(numPart, limiteSuperior, limiteInferior - limiteSuperior -1, true));
                 }
                 inferior =false;

@@ -6,7 +6,7 @@ package Modelo;
 
 /**
  *
- * @author jonat
+ * @author jonatan, Jesus, Natali, Angélica
  */
 public class AreasProceso {
     private int localidad;
