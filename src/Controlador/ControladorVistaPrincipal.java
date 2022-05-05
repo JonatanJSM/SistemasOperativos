@@ -109,9 +109,15 @@ public class ControladorVistaPrincipal implements ActionListener {
 
             vista.getTablaModelo3().addRow(new Object[] {"SO"});
             this.vista.getjTable3().setRowHeight(0,90);
-            for(Particiones particionActual : mvt.getParticiones()){
-                vista.getTablaModelo3().addRow(new Object[] {particionActual.getProceso()});
+//            for(Particiones particionActual : mvt.getParticiones()){
+//                vista.getTablaModelo3().addRow(new Object[] {particionActual.getProceso()});
+//            }
+
+            for(int i = mvt.getMemoriaPrincipal().getElementos().size()-1;i>0;i--){
+                vista.getTablaModelo3().addRow(new Object[] {mvt.getMemoriaPrincipal().getElementos().get(i).getNomAux()});
+                System.out.print("hola "+ mvt.getMemoriaPrincipal().getElementos().get(i).getNomAux());
             }
+            //vista.getTablaModelo3().addRow(new Object[] {mvt.getMemoriaPrincipal().getElementos().get(0).getNomAux()});
             actuliazarAlturaCeldas();
            // System.out.println("Columnas"+vista.getjTable3().getRowCount());
             //AGREGAR EL DEFAULTRENDER PARA PODER CAMBIAR EL COLOR DE LAS FILAS DE ALGUNA TABLA
@@ -174,7 +180,7 @@ public class ControladorVistaPrincipal implements ActionListener {
     
     public void actuliazarAlturaCeldas(){
         for(int i = 1; i<vista.getjTable3().getRowCount(); i++){
-           this.vista.getjTable3().setRowHeight(i, mvt.getParticiones().get(i-1).getTamanio()*9);
+           this.vista.getjTable3().setRowHeight(i,mvt.getMemoriaPrincipal().getElementos().get(i).getTamanio()*9);
         }
     }
 }

@@ -12,6 +12,7 @@ public class AreasProceso {
     private int localidad;
     private int tamanio;
     private boolean estado;
+    private String nomAux;
     // Disponible = true     Asignado = false
 
     public AreasProceso(int localidad, int tamanio, boolean estado) {
@@ -19,6 +20,18 @@ public class AreasProceso {
         this.tamanio = tamanio;
         this.estado = estado;
     }
+
+    public AreasProceso(int localidad, int tamanio, boolean estado, String nomAux) {
+        this.localidad = localidad;
+        this.tamanio = tamanio;
+        this.estado = estado;
+        this.nomAux = nomAux;
+    }
+
+    public AreasProceso() {
+    }
+    
+    
 
     public int getLocalidad() {
         return localidad;
@@ -31,5 +44,22 @@ public class AreasProceso {
     public boolean getEstado() {
         return estado;
     }
+
+    public String getNomAux() {
+        return nomAux;
+    }
+
+ 
+    
+    
+    public boolean compareTo(Object o) {
+         return localidad>(((AreasProceso)o).getLocalidad());
+    }
+
+    @Override
+    public String toString() {
+        return "AreasProceso{" + "localidad=" + localidad + ", tamanio=" + tamanio + ", estado=" + estado + ", nomAux=" + nomAux + '}';
+    }
+    
     
 }

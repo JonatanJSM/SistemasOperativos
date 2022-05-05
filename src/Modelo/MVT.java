@@ -83,6 +83,9 @@ public class MVT {
         actualizarEspera();
         
         agregarProcesosEntrantes(empty);
+        
+        memoriaPrincipal.agregarElementos(areaslibres, particiones);
+        //memoriaPrincipal.imprimir();
     }
 
     public static Particiones findParticionByProceso(Collection<Particiones> listCarnet, String codeIsIn) {
