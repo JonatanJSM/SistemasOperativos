@@ -113,7 +113,7 @@ public class ControladorVistaPrincipal implements ActionListener {
 //                vista.getTablaModelo3().addRow(new Object[] {particionActual.getProceso()});
 //            }
 
-            for(int i = mvt.getMemoriaPrincipal().getElementos().size()-1;i>0;i--){
+            for(int i = 0 ;i<mvt.getMemoriaPrincipal().getElementos().size()-1;i++){
                 vista.getTablaModelo3().addRow(new Object[] {mvt.getMemoriaPrincipal().getElementos().get(i).getNomAux()});
                 System.out.print("hola "+ mvt.getMemoriaPrincipal().getElementos().get(i).getNomAux());
             }
@@ -179,8 +179,9 @@ public class ControladorVistaPrincipal implements ActionListener {
     }
     
     public void actuliazarAlturaCeldas(){
-        for(int i = 1; i<vista.getjTable3().getRowCount(); i++){
-           this.vista.getjTable3().setRowHeight(i,mvt.getMemoriaPrincipal().getElementos().get(i).getTamanio()*9);
+        for(int i = 0; i<vista.getjTable3().getRowCount(); i++){
+           this.vista.getjTable3().setRowHeight(i+1,mvt.getMemoriaPrincipal().getElementos().get(i).getTamanio()*9);
+           System.out.println("Tamaño :" +mvt.getMemoriaPrincipal().getElementos().get(i).getTamanio());
         }
     }
 }

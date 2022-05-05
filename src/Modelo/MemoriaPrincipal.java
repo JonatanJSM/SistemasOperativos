@@ -6,6 +6,7 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -70,6 +71,7 @@ public class MemoriaPrincipal {
                                    // localidad, tamaño, estado, nombre
             elementos.add(new AreasProceso(areaLibreActual.getLocalidad(),areaLibreActual.getTamanio(),true,"Area Libre"));
         }
+        elementos.add(new AreasProceso(areaslibres.get(areaslibres.size()-1).getLocalidad(),areaslibres.get(areaslibres.size()-1).getTamanio(),true,"Area Libre"));
         insercion();
         
         System.out.println(elementos);
@@ -86,7 +88,8 @@ public class MemoriaPrincipal {
             k--;
           }
           elementos.set(k+1, aux);
-        }        
+        } 
+        Collections.reverse(elementos);
     }
     
     public void imprimir(){
