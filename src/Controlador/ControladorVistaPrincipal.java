@@ -43,21 +43,29 @@ public class ControladorVistaPrincipal implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        mvt.aumentaTiempo();
-        mvt.gestorTiempo();
-        vista.getjButton1().setText("Paso " + mvt.getTiempo());
-        
-        actualizaALibres();
-        actualizaParticiones();
-        actualizaMemoria();
-        
-        try {
-            limiteIndices();
-        } catch (IOException ex) {
-            //Logger.getLogger(ControladorVistaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        if(mvt.getTiempo()<12){
+            mvt.aumentaTiempo();
+            mvt.gestorTiempo();
+            vista.getjButton1().setText("Paso " + mvt.getTiempo());
+
+            actualizaALibres();
+            actualizaParticiones();
+            actualizaMemoria();
+
+            try {
+                limiteIndices();
+            } catch (IOException ex) {
+                //Logger.getLogger(ControladorVistaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            System.out.println("AREA DISPONIBLE: " + mvt.getMemoriaPrincipal().getAreaDisponible());
+        }else{
+            vista.getjButton1().setText("Finalizada");
+            if(mvt.getTiempo()>12){
+                System.exit(0);
+            } 
+            mvt.aumentaTiempo();
         }
-        
-        System.out.println("AREA DISPONIBLE: " + mvt.getMemoriaPrincipal().getAreaDisponible());
     }
     
     
