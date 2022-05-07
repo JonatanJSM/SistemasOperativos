@@ -23,7 +23,7 @@ public class MyTableCellRender extends DefaultTableCellRenderer
         }    
         else
         {    
-            setBackground(Color.cyan);    
+            setBackground(Color.red);    
             setForeground(Color.black);    
         } 
         setText(value !=null ? value.toString() : "");
