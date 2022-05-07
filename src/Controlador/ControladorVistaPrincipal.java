@@ -201,17 +201,27 @@ public class ControladorVistaPrincipal implements ActionListener {
         }
     }
     
-    public void limiteIndices() throws IOException{
+public void limiteIndices() throws IOException{
         BufferedImage image = ImageIO.read(new File("fondo.png"));
         Graphics g = image.getGraphics();
         g.setFont(new Font("Arial",Font.BOLD,12));
         g.setColor(Color.black);
         g.drawString("0", 15, 15);
-        g.drawString("10", 15, 95);
-        g.drawString("64", 15, 570);
+        g.drawString("10", 15, 120);
+        g.drawString("64", 15, 600);
+        int x = 120;
+        for(int i = 1; i<vista.getjTable3().getRowCount()-1; i++){
+            g.drawString(mvt.getMemoriaPrincipal().getElementos().get(i).getLocalidad()+"",15,x+mvt.getMemoriaPrincipal().getElementos().get(i-1).getTamanio()*8);
+           //this.vista.getjTable3().setRowHeight(i+1,mvt.getMemoriaPrincipal().getElementos().get(i).getTamanio()*9);
+           x+=mvt.getMemoriaPrincipal().getElementos().get(i-1).getTamanio()*8;
+           System.out.println("Proces :" +mvt.getMemoriaPrincipal().getElementos().get(i).getTamanio());
+           
+        }
         g.dispose();
         ImageIO.write(image, "png", new File("test.png"));
         agregarImagen();
+
+
     }
     
     public void agregarImagen(){
