@@ -20,6 +20,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import javax.swing.JTable;
@@ -224,7 +225,8 @@ public void limiteIndices() throws IOException{
 
     }
     
-    public void agregarImagen(){
-        this.vista.getjLabel4().setIcon(new ImageIcon("test.png"));
+    public void agregarImagen() throws IOException{
+        Icon icon = new ImageIcon(ImageIO.read(new File("test.png")));
+        this.vista.getjLabel4().setIcon(icon);
     }
 }
