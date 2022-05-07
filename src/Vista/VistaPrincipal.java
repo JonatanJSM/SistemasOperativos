@@ -70,7 +70,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jLabel1.setText("SIMULACIÓN DE ASIGNACIÓN DE MEMORIA CON MVT");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, 324, -1));
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Paso 0");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -112,7 +112,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTable3);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 50, 160, 610));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 50, 160, 590));
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
