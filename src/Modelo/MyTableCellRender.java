@@ -16,13 +16,13 @@ public class MyTableCellRender extends DefaultTableCellRenderer
     public Component getTableCellRendererComponent(JTable table, Object value, 
             boolean isSelected, boolean hasFocus, int row, int column) 
     { 
-        if( (String)table.getValueAt(row, 0) == "Z")
+        if( (String)table.getValueAt(row, 1) == "A")
         {
             setForeground(Color.black);        
-            setBackground(Color.red);            
+            setBackground(Color.cyan);            
         }    
         else
-        {    
+        {   //Color  
             setBackground(Color.red);    
             setForeground(Color.black);    
         } 
