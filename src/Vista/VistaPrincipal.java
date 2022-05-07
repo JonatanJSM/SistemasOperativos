@@ -63,6 +63,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -112,7 +113,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTable3);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 50, 160, 590));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 50, 160, 600));
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,6 +136,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jLabel3.setText("Tabla Particiones (TP[])");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, -1, -1));
+
+        jLabel4.setText("jLabel4");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 50, 50, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -204,6 +208,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     public JLabel getjLabel3() {
         return jLabel3;
+    }
+    
+    public JLabel getjLabel4() {
+        return jLabel4;
     }
 
     public void setjLabel3(JLabel jLabel3) {
@@ -279,6 +287,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

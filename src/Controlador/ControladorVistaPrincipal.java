@@ -10,9 +10,17 @@ import Modelo.MVT;
 import Modelo.MyTableCellRender;
 import Modelo.Particiones;
 import Vista.VistaPrincipal;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import javax.swing.JTable;
 
@@ -42,8 +50,16 @@ public class ControladorVistaPrincipal implements ActionListener {
         actualizaParticiones();
         actualizaMemoria();
         
+        try {
+            limiteIndices();
+        } catch (IOException ex) {
+            //Logger.getLogger(ControladorVistaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         System.out.println("AREA DISPONIBLE: " + mvt.getMemoriaPrincipal().getAreaDisponible());
     }
+    
+    
 
     //tabla1 es areas libres
     public void actualizaALibres(){
@@ -183,5 +199,22 @@ public class ControladorVistaPrincipal implements ActionListener {
            this.vista.getjTable3().setRowHeight(i+1,mvt.getMemoriaPrincipal().getElementos().get(i).getTamanio()*9);
            System.out.println("Tamaño :" +mvt.getMemoriaPrincipal().getElementos().get(i).getTamanio());
         }
+    }
+    
+    public void limiteIndices() throws IOException{
+        BufferedImage image = ImageIO.read(new File("fondo.png"));
+        Graphics g = image.getGraphics();
+        g.setFont(new Font("Arial",Font.BOLD,12));
+        g.setColor(Color.black);
+        g.drawString("0", 15, 15);
+        g.drawString("10", 15, 95);
+        g.drawString("64", 15, 570);
+        g.dispose();
+        ImageIO.write(image, "png", new File("test.png"));
+        agregarImagen();
+    }
+    
+    public void agregarImagen(){
+        this.vista.getjLabel4().setIcon(new ImageIcon("test.png"));
     }
 }

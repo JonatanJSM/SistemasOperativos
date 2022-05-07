@@ -20,7 +20,7 @@ public class MemoriaPrincipal {
 
     public MemoriaPrincipal(){
         this.celdasMemoria = new ArrayList <>();
-        for(int i = 0; i <= 64; i++){
+        for(int i = 0; i < 64; i++){
             celdasMemoria.add(new Celdas());
         }
         this.areaDisponible = 54;
