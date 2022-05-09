@@ -159,7 +159,6 @@ public class ControladorVistaPrincipal implements ActionListener {
     public void  crearTablaAreasLibres(){
         //SE CREA LA TABLA DE AREAS LIBRES 
 
-        //Mostrar barra horizontal 
         vista.getjTable1().setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         int[] anchos = {30, 30, 30, 30};

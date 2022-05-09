@@ -49,9 +49,6 @@ public class AreasProceso {
         return nomAux;
     }
 
- 
-    
-    
     public boolean compareTo(Object o) {
          return localidad>(((AreasProceso)o).getLocalidad());
     }

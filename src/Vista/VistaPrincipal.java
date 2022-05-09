@@ -137,8 +137,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jLabel3.setText("Tabla Particiones (TP[])");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, -1, -1));
-
-        jLabel4.setText("jLabel4");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 50, 50, 600));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
