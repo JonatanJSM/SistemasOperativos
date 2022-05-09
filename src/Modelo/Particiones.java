@@ -26,4 +26,11 @@ public class Particiones extends AreasProceso{
     public String getProceso() {
         return proceso;
     }
+
+    @Override
+    public String toString() {
+        return "Particiones{" + "numero=" + numero + ", proceso=" + proceso + '}';
+    }
+    
+    
 }
