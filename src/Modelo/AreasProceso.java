@@ -31,8 +31,6 @@ public class AreasProceso {
     public AreasProceso() {
     }
     
-    
-
     public int getLocalidad() {
         return localidad;
     }
@@ -51,12 +49,5 @@ public class AreasProceso {
 
     public boolean compareTo(Object o) {
          return localidad>(((AreasProceso)o).getLocalidad());
-    }
-
-    @Override
-    public String toString() {
-        return "AreasProceso{" + "localidad=" + localidad + ", tamanio=" + tamanio + ", estado=" + estado + ", nomAux=" + nomAux + '}';
-    }
-    
-    
+    }    
 }

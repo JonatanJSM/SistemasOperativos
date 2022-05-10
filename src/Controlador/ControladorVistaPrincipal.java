@@ -57,10 +57,7 @@ public class ControladorVistaPrincipal implements ActionListener {
             try {
                 limiteIndices();
             } catch (IOException ex) {
-                //Logger.getLogger(ControladorVistaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            System.out.println("AREA DISPONIBLE: " + mvt.getMemoriaPrincipal().getAreaDisponible());
         }else{
             vista.getjButton1().setText("Finalizada");
             if(mvt.getTiempo()>12){
@@ -74,13 +71,11 @@ public class ControladorVistaPrincipal implements ActionListener {
 
     //tabla1 es areas libres
     public void actualizaALibres(){
-        //tablaModelo.setDefaultRenderer(Object.class, new MyTableCellRender());
         vista.getTablamodelo1().setRowCount(0);
         vista.getjTable1().setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         
         int[] anchos = {30, 30, 30, 30};
         
-        //int indiceALibre = 0;
         for(AreasLibres areaActual : mvt.getAreasLibres()){
             if(areaActual.getEstado() == true){
                 vista.getTablamodelo1().addRow(new Object[] {areaActual.getNumero(), 
@@ -92,10 +87,7 @@ public class ControladorVistaPrincipal implements ActionListener {
                                                 areaActual.getTamanio(), "A"});
             }
         }
-        //tablaModelo.addRow(new Object[] {this.mvt.getTiempo(), 10 ,54, "D"});
-        //AGREGAR EL DEFAULTRENDER PARA PODER CAMBIAR EL COLOR DE LAS FILAS DE ALGUNA TABLA
-        //this.vista.getjTable1().setDefaultRenderer(Object.class, new MyTableCellRender());
-        
+
         for (int i = 0; i < this.vista.getjTable1().getColumnCount(); i++) {
             this.vista.getjTable1().getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }
@@ -122,32 +114,23 @@ public class ControladorVistaPrincipal implements ActionListener {
                                                 particionActual.getProceso()});
             }
         }
-        //tparticiones.addRow(new Object[] {"","","","",""}); //fila de prueba
     }
 
     //tabla3 es memoria
-
     public void actualizaMemoria(){
-
-        //tablaModelo.setDefaultRenderer(Object.class, new MyTableCellRender());
             vista.getTablaModelo3().setRowCount(0);
             int[] anchos = {100};
                 this.vista.getjTable1().getColumnModel().getColumn(0).setMinWidth(anchos[0]);
 
             vista.getTablaModelo3().addRow(new Object[] {"SO"});
             this.vista.getjTable3().setRowHeight(0,90);
-//            for(Particiones particionActual : mvt.getParticiones()){
-//                vista.getTablaModelo3().addRow(new Object[] {particionActual.getProceso()});
-//            }
-
+            
             for(int i = 0 ;i<mvt.getMemoriaPrincipal().getElementos().size()-1;i++){
                 vista.getTablaModelo3().addRow(new Object[] {mvt.getMemoriaPrincipal().getElementos().get(i).getNomAux()});
-                System.out.print("hola "+ mvt.getMemoriaPrincipal().getElementos().get(i).getNomAux());
             }
-            //vista.getTablaModelo3().addRow(new Object[] {mvt.getMemoriaPrincipal().getElementos().get(0).getNomAux()});
+            
             actuliazarAlturaCeldas();
-           // System.out.println("Columnas"+vista.getjTable3().getRowCount());
-            //AGREGAR EL DEFAULTRENDER PARA PODER CAMBIAR EL COLOR DE LAS FILAS DE ALGUNA TABLA
+
             this.vista.getjTable3().setDefaultRenderer(Object.class, new MyTableCellRender());
     }
 
@@ -186,29 +169,20 @@ public class ControladorVistaPrincipal implements ActionListener {
         for (int i = 0; i < this.vista.getjTable1().getColumnCount(); i++) {
             this.vista.getjTable1().getColumnModel().getColumn(i).setMinWidth(anchosP[i]);
         }    
-       
-       
     }
     
     public void crearTablaMemoria(){
          //SE CREA LA TABLA DE LA MEMORIA
         
-        //tablaModelo.setDefaultRenderer(Object.class, new MyTableCellRender());
-   
         //Se establece el ancho de la columna de la tabla
             this.vista.getjTable1().getColumnModel().getColumn(0).setMinWidth(100);
 
-        //tablaModelo.addRow(new Object[] {"SO"}); fila de prueba
-        
-        //AGREGAR EL DEFAULTRENDER PARA PODER CAMBIAR EL COLOR DE LAS FILAS DE ALGUNA TABLA
         this.vista.getjTable3().setDefaultRenderer(Object.class, new MyTableCellRender());
-
     }
     
     public void actuliazarAlturaCeldas(){
         for(int i = 0; i<vista.getjTable3().getRowCount(); i++){
            this.vista.getjTable3().setRowHeight(i+1,mvt.getMemoriaPrincipal().getElementos().get(i).getTamanio()*9);
-           System.out.println("Tamaño :" +mvt.getMemoriaPrincipal().getElementos().get(i).getTamanio());
         }
     }
     
@@ -223,16 +197,11 @@ public void limiteIndices() throws IOException{
         int x = 120;
         for(int i = 1; i<vista.getjTable3().getRowCount()-1; i++){
             g.drawString(mvt.getMemoriaPrincipal().getElementos().get(i).getLocalidad()+"",15,x+mvt.getMemoriaPrincipal().getElementos().get(i-1).getTamanio()*9);
-           //this.vista.getjTable3().setRowHeight(i+1,mvt.getMemoriaPrincipal().getElementos().get(i).getTamanio()*9);
            x+=mvt.getMemoriaPrincipal().getElementos().get(i-1).getTamanio()*9;
-           System.out.println("Proces :" +mvt.getMemoriaPrincipal().getElementos().get(i).getTamanio());
-           
         }
         g.dispose();
         ImageIO.write(image, "png", new File("test.png"));
         agregarImagen();
-
-
     }
     
     public void agregarImagen() throws IOException{

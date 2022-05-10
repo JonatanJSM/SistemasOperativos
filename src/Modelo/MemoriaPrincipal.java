@@ -55,7 +55,6 @@ public class MemoriaPrincipal {
                 area++;
             }
         } 
-
         setAreaDisponible(area);
         return area;
     }
@@ -73,8 +72,6 @@ public class MemoriaPrincipal {
         }
         elementos.add(new AreasProceso(areaslibres.get(areaslibres.size()-1).getLocalidad(),areaslibres.get(areaslibres.size()-1).getTamanio(),true,"Area Libre"));
         insercion();
-        
-        System.out.println(elementos);
     }
     
     public void insercion(){
@@ -90,9 +87,5 @@ public class MemoriaPrincipal {
           elementos.set(k+1, aux);
         } 
         Collections.reverse(elementos);
-    }
-    
-    public void imprimir(){
-        System.out.println(elementos);
     }
 }

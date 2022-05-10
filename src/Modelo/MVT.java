@@ -85,7 +85,6 @@ public class MVT {
         agregarProcesosEntrantes(empty);
         
         memoriaPrincipal.agregarElementos(areaslibres, particiones);
-        //memoriaPrincipal.imprimir();
     }
 
     public static Particiones findParticionByProceso(Collection<Particiones> listCarnet, String codeIsIn) {
@@ -101,10 +100,6 @@ public class MVT {
                     Particiones particionPorBorrar = findParticionByProceso(particiones, procesoActual.getNombreProceso());
                     for(int i  = (particionPorBorrar.getLocalidad()) ; i < particionPorBorrar.getLocalidad() + particionPorBorrar.getTamanio(); i++){
                         memoriaPrincipal.getCeldas().get(i).setAsignada(false);
-                        System.out.println("CElda borrada " + i + ": " + memoriaPrincipal.getCeldas().get(i).isAsignada());
-                    }
-                    for (Particiones areas : particiones) {
-                        System.out.println("Particion " + areas.getNumero() + areas.getProceso());
                     }
                     particiones.removeIf( particiones -> particiones.getProceso().equals(procesoActual.getNombreProceso()));
                 }
@@ -149,7 +144,6 @@ public class MVT {
                         //SE MARCAN LAS CELDAS OCUPADAS:
                         for(int i  = ultLocParticion; i < ultLocParticion + procesoActual.getTamanio(); i++){
                             memoriaPrincipal.getCeldas().get(i).setAsignada(true);
-                            System.out.println("CElda " + i + ": " + memoriaPrincipal.getCeldas().get(i).isAsignada());
                         }
                     }else{
                         //SE PONE EL PROCESO EN ESPERA
@@ -173,20 +167,17 @@ public class MVT {
                 if( memoriaPrincipal.getCeldas().get(i).isAsignada() == true && memoriaPrincipal.getCeldas().get(i+1).isAsignada() == false){
                     limiteInferior = i+1;
                     inferior = true;
-                    System.out.println("        -----------------------------INFERIOR: " + limiteInferior );
                 }
                 if( i != 63){
                     if( memoriaPrincipal.getCeldas().get(i).isAsignada() == false && memoriaPrincipal.getCeldas().get(i+1).isAsignada() == true){
                         limiteSuperior = i+1;
                         superior = true;
-                        System.out.println("        -----------------------------SuPERIOR: " + limiteSuperior );
                     }
                 }else{
                     if(superior ==false){
                         if(memoriaPrincipal.getCeldas().get(63).isAsignada() == false && memoriaPrincipal.getCeldas().get(62).isAsignada() == false){
                             limiteSuperior = 64;
                             superior  = true;
-                            System.out.println("        -----------------------------SuPERIOR: " + limiteSuperior );
                         }
                     }
                 }
