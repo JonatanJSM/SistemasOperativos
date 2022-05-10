@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -28,6 +30,20 @@ public class VistaPrincipal extends javax.swing.JFrame {
         Tablamodelo1 = (DefaultTableModel) this.jTable1.getModel();
         TablaModelo2 = (DefaultTableModel) this.jTable2.getModel();
         TablaModelo3 = (DefaultTableModel) this.jTable3.getModel();
+        jTable1.getTableHeader().setBackground(new Color(101, 39, 153));
+        jTable1.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+        jTable1.getTableHeader().setForeground(Color.white);
+        jTable2.getTableHeader().setBackground(new Color(101, 39, 153));
+        jTable2.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+        jTable2.getTableHeader().setForeground(Color.white);
+        jTable3.getTableHeader().setBackground(new Color(58, 74, 190));
+        jTable3.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+        jTable3.getTableHeader().setForeground(Color.white);
+        jTable4.getTableHeader().setBackground(new Color(101, 39, 153));
+        jTable4.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+        jTable4.getTableHeader().setForeground(Color.white);
+        jButton1.setBackground(new Color(125,239,154));
+        
     }
 
     public DefaultTableModel getTablamodelo1() {
@@ -91,6 +107,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 650, 150));
 
+        jTable2.setBackground(new java.awt.Color(153, 0, 153));
+        jTable2.setForeground(new java.awt.Color(255, 255, 255));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -129,7 +147,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(jTable4);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 470, 130));
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 590, 110));
 
         jLabel2.setText("Tabla Áreas Libres (TAL[])");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 150, -1));

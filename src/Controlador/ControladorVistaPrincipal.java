@@ -9,6 +9,7 @@ import Modelo.AreasLibres;
 import Modelo.MVT;
 import Modelo.MyTableCellRender;
 import Modelo.Particiones;
+import Modelo.TablasRender;
 import Vista.VistaPrincipal;
 import java.awt.Color;
 import java.awt.Font;
@@ -39,6 +40,7 @@ public class ControladorVistaPrincipal implements ActionListener {
         this.mvt = modelo;
         this.vista.getjButton1().addActionListener(this);
         iniciarTablas();
+        this.vista.getjTable4().setDefaultRenderer(Object.class, new TablasRender());
     }
 
     @Override
@@ -158,7 +160,7 @@ public class ControladorVistaPrincipal implements ActionListener {
     
     public void  crearTablaAreasLibres(){
         //SE CREA LA TABLA DE AREAS LIBRES 
-
+        this.vista.getjTable1().setDefaultRenderer(Object.class, new TablasRender());
         vista.getjTable1().setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         int[] anchos = {30, 30, 30, 30};
@@ -179,7 +181,7 @@ public class ControladorVistaPrincipal implements ActionListener {
     
     public void crearTablaParticiones(){
          //SE CREA LA TABLA DE PARTICIONES
-
+         this.vista.getjTable2().setDefaultRenderer(Object.class, new TablasRender());
         int[] anchosP = {50, 200, 200, 200,100};
         for (int i = 0; i < this.vista.getjTable1().getColumnCount(); i++) {
             this.vista.getjTable1().getColumnModel().getColumn(i).setMinWidth(anchosP[i]);
