@@ -187,7 +187,7 @@ public class ControladorVistaPrincipal implements ActionListener {
     }
     
 public void limiteIndices() throws IOException{
-        BufferedImage image = ImageIO.read(new File("fondo.png"));
+        BufferedImage image = ImageIO.read(new File("C:\\Users\\Public\\proyec\\fondo.png"));
         Graphics g = image.getGraphics();
         g.setFont(new Font("Arial",Font.BOLD,11));
         g.setColor(Color.black);
@@ -200,12 +200,12 @@ public void limiteIndices() throws IOException{
            x+=mvt.getMemoriaPrincipal().getElementos().get(i-1).getTamanio()*9;
         }
         g.dispose();
-        ImageIO.write(image, "png", new File("test.png"));
+        ImageIO.write(image, "png", new File("C:\\Users\\Public\\proyec\\test.png"));
         agregarImagen();
     }
     
     public void agregarImagen() throws IOException{
-        Icon icon = new ImageIcon(ImageIO.read(new File("test.png")));
+        Icon icon = new ImageIcon(ImageIO.read(new File("C:\\Users\\Public\\proyec\\test.png")));
         this.vista.getjLabel4().setIcon(icon);
     }
 }
